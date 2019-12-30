@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -82,6 +83,36 @@ void breathFirstSearch()
     reset();
 }
 
+void depthFirstSearch()
+{
+    stack<int> my_stack;
+    my_stack.push(0);
+    for(int i = 0;;)
+    {
+        cout<<i<<" is connected to ";
+        for(int j = 0; j < 6; j++)
+        {
+            if(vertArr[x][y] == 1)
+            {
+                cout<<j<<" , ";
+                if(!vertArr[i][j].visited)
+                {
+                    my_stack.push(i);   i=my_stack.back();
+                    vertArr[i][j].visited=true;
+                    vertArr[j][i].visited=true;
+                    break;
+                }
+            }
+            elseif(j==5)
+            {
+
+            }
+
+
+        }
+    }
+}
+
 
 int main()
 {
@@ -91,6 +122,8 @@ int main()
     add_edge(1, 4);
     add_edge(2, 3);
     add_edge(3, 5);
+    add_edge(1, 5);
+    add_edge(4, 5);
     displayMatrix();
     cout<<endl<<"BFS"<<endl;
     breathFirstSearch();
