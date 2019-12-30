@@ -1,8 +1,9 @@
 #include <iostream>
+#include <queue>
 
 using namespace std;
 
-int vertArr[20][20]; //the adjacency matrix initially 0
+int vertArr[20][20];
 int count = 0;
 void displayMatrix(int v)
 {
@@ -17,13 +18,19 @@ void displayMatrix(int v)
     }
 }
 
-
-
 void add_edge(int u, int v)
 {
     vertArr[u][v] = 1;
     vertArr[v][u] = 1;
 }
+
+void depthFirstSearch()
+{
+    queue <int> my_quee;
+
+
+}
+
 
 int main()
 {
