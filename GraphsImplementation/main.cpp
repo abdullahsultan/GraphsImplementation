@@ -3,7 +3,8 @@
 
 using namespace std;
 
-class Node{
+class Node
+{
 public:
     int vertex;
     bool visited;
@@ -51,37 +52,48 @@ void add_edge(int u, int v)
     vertArr[v][u].vertex = 1;
 }
 
+
 void breathFirstSearch()
 {
     queue <int> my_quee;
     my_quee.push(0);
-    for(int i = 0; i < 6; i++)
+    for(int i = 0; i < 6;)
     {
         cout<<i<<" is connected to ";
         for(int j = 0; j < 6; j++)
         {
-            if(vertArr[i][j].vertex == 1 && vertArr[i][j].visited != true)
+            if(vertArr[i][j].vertex == 1 )
             {
-              my_quee.push(j);
-              vertArr[i][j].visited=true;
-              cout<<j<<" , ";
+                if(!vertArr[i][j].visited)
+                {
+                    my_quee.push(j);
+                    vertArr[i][j].visited=true;
+                    vertArr[j][i].visited=true;
+                }
+                cout<<j<<" , ";
             }
         }
         cout<<endl;
         my_quee.pop();
         i=my_quee.front();
         if(my_quee.empty())
-           break;
+            break;
     }
+    reset();
 }
 
 
 int main()
 {
-        add_edge(0, 4); add_edge(0, 3); add_edge(1, 2);  add_edge(1, 4); add_edge(2, 3); add_edge(3, 5);
-        displayMatrix();
-        cout<<endl<<"DFS"<<endl;
-        breathFirstSearch();
+    add_edge(0, 4);
+    add_edge(0, 3);
+    add_edge(1, 2);
+    add_edge(1, 4);
+    add_edge(2, 3);
+    add_edge(3, 5);
+    displayMatrix();
+    cout<<endl<<"BFS"<<endl;
+    breathFirstSearch();
 
     return 0;
 }
