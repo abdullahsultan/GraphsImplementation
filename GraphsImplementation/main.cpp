@@ -14,14 +14,19 @@ public:
     }
 };
 
-Node vertArr[5][5];
+Node vertArr[6][6];
 
 void displayMatrix()
 {
     int i, j;
-    for(i = 0; i < 5; i++)
+    cout<<"    ";
+    for(i = 0; i < 6; i++)
+        cout<<i<<" ";
+    cout<<endl<<endl;
+    for(i = 0; i < 6; i++)
     {
-        for(j = 0; j < 5; j++)
+        cout<<i<<"   ";
+        for(j = 0; j < 6; j++)
         {
             cout << vertArr[i][j].vertex << " ";
         }
@@ -31,9 +36,9 @@ void displayMatrix()
 
 void reset()
 {
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < 6; i++)
     {
-        for(int j = 0; j < 5; j++)
+        for(int j = 0; j < 6; j++)
         {
             vertArr[i][j].visited = false;
         }
@@ -49,30 +54,31 @@ void add_edge(int u, int v)
 void breathFirstSearch()
 {
     queue <int> my_quee;
-    for(int i = 0; i < 5; i++)
+    my_quee.push(0);
+    for(int i = 0; i < 6; i++)
     {
-        for(int j = 0; j < 5; j++)
+        cout<<i<<" is connected to ";
+        for(int j = 0; j < 6; j++)
         {
-            cout<<i<<" is connected to ";
             if(vertArr[i][j].vertex == 1 && vertArr[i][j].visited != true)
             {
-              my_quee.push(i);
+              my_quee.push(j);
               vertArr[i][j].visited=true;
               cout<<j<<" , ";
             }
-            cout<<endl;
-            my_quee.pop();
-            i=my_quee.front();
-            if(my_quee.empty())
-                break;
         }
+        cout<<endl;
+        my_quee.pop();
+        i=my_quee.front();
+        if(my_quee.empty())
+           break;
     }
 }
 
 
 int main()
 {
-        add_edge(0, 4); add_edge(0, 3); add_edge(1, 2);  add_edge(1, 4); add_edge(1, 5); add_edge(2, 3); add_edge(2, 5); add_edge(5, 3); add_edge(5, 4);
+        add_edge(0, 4); add_edge(0, 3); add_edge(1, 2);  add_edge(1, 4); add_edge(2, 3); add_edge(3, 5);
         displayMatrix();
         cout<<endl<<"DFS"<<endl;
         breathFirstSearch();
