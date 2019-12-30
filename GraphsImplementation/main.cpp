@@ -1,3 +1,5 @@
+////////////////////////// Representing Iterative version of DFS and BFS (Spanning trees) of Graphs  /////////////////////////////
+
 #include <iostream>
 #include <queue>
 #include <stack>
@@ -92,24 +94,28 @@ void depthFirstSearch()
         cout<<i<<" is connected to ";
         for(int j = 0; j < 6; j++)
         {
-            if(vertArr[x][y] == 1)
+            if(vertArr[i][j].vertex == 1)
             {
                 cout<<j<<" , ";
                 if(!vertArr[i][j].visited)
                 {
-                    my_stack.push(i);   i=my_stack.back();
+                    cout<<"             Stack Updated";
                     vertArr[i][j].visited=true;
                     vertArr[j][i].visited=true;
+                    my_stack.push(j);
+                    i=my_stack.top();
                     break;
                 }
             }
-            elseif(j==5)
+            if(j==5)
             {
-
+                i=my_stack.top();
+                my_stack.pop();
             }
-
-
         }
+        cout<<endl;
+        if(my_stack.empty())
+            break;
     }
 }
 
@@ -127,6 +133,7 @@ int main()
     displayMatrix();
     cout<<endl<<"BFS"<<endl;
     breathFirstSearch();
-
+    cout<<endl<<"DFS"<<endl;
+    depthFirstSearch();
     return 0;
 }
